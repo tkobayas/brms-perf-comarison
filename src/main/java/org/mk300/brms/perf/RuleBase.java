@@ -22,134 +22,134 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class RuleBase {
-	private static final Logger logger = LoggerFactory.getLogger(RuleBase.class);
-	
-	private KieBase kBase;
-	private ConcurrentLinkedQueue<KieSession> pool;
-	private ReleaseId releaseId;
-	
-	public RuleBase(String ruleDir, RuleEngineOption option) {
+    private static final Logger logger = LoggerFactory.getLogger(RuleBase.class);
+
+    private KieBase kBase;
+    private ConcurrentLinkedQueue<KieSession> pool;
+    private ReleaseId releaseId;
+
+    public RuleBase(String ruleDir, RuleEngineOption option) {
         logger.info("##################### RuleBase start ");
-		try {
-			
-			pool = new ConcurrentLinkedQueue<>();
-			kBase = createNewKBase(ruleDir, option);
+        try {
 
-			if(kBase == null) {
-				throw new RuntimeException("rule build error.");
-			}
-			
-			logKBase(kBase);
-			
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}		
-	}
+            pool = new ConcurrentLinkedQueue<>();
+            kBase = createNewKBase(ruleDir, option);
 
+            if (kBase == null) {
+                throw new RuntimeException("rule build error.");
+            }
 
-	private KieBase createNewKBase(String ruleDir, RuleEngineOption option) {		
-		KieServices kieServices = KieServices.Factory.get();
-		KieFileSystem kfs = kieServices.newKieFileSystem();
+            logKBase(kBase);
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private KieBase createNewKBase(String ruleDir, RuleEngineOption option) {
+        KieServices kieServices = KieServices.Factory.get();
+        KieFileSystem kfs = kieServices.newKieFileSystem();
 
         KieRepository kr = kieServices.getRepository();
-		releaseId = kr.getDefaultReleaseId();
-		
-		File ruleBaseDirFile = new File(ruleDir);
-		writeAllRule(kfs, ruleBaseDirFile);
+        releaseId = kr.getDefaultReleaseId();
 
-		KieBuilder kieBuilder = kieServices.newKieBuilder(kfs).buildAll();
-		if (kieBuilder.getResults().getMessages(Level.WARNING).size() > 0) {
-			logger.warn("kieBuilder warn!: {}", kieBuilder.getResults().getMessages(Level.WARNING));
-		}
-		if (kieBuilder.getResults().getMessages(Level.ERROR).size() > 0) {
-			logger.error("kieBuilder error!: {}", kieBuilder.getResults().getMessages(Level.ERROR));
-			return null;
-		}
+        File ruleBaseDirFile = new File(ruleDir);
+        writeAllRule(kfs, ruleBaseDirFile);
 
-		KieContainer kieContainer = kieServices.newKieContainer(releaseId);
-		KieBaseConfiguration kconfig = kieServices.newKieBaseConfiguration();
-		kconfig.setOption(option);
-		return kieContainer.newKieBase(kconfig);
-	}
-	
-	private void writeAllRule(KieFileSystem kfs, File file) {
-		if (!file.exists() || file.isHidden()) {
-			return;
-		}
+        KieBuilder kieBuilder = kieServices.newKieBuilder(kfs).buildAll();
+        if (kieBuilder.getResults().getMessages(Level.WARNING).size() > 0) {
+            logger.warn("kieBuilder warn!: {}", kieBuilder.getResults().getMessages(Level.WARNING));
+        }
+        if (kieBuilder.getResults().getMessages(Level.ERROR).size() > 0) {
+            logger.error("kieBuilder error!: {}", kieBuilder.getResults().getMessages(Level.ERROR));
+            return null;
+        }
 
-		if (file.isDirectory()) {
-			for (File subFile : file.listFiles()) {
-				writeAllRule(kfs, subFile);
-			}
-			return;
-		}
+        KieContainer kieContainer = kieServices.newKieContainer(releaseId);
+        KieBaseConfiguration kconfig = kieServices.newKieBaseConfiguration();
+        kconfig.setOption(option);
+        return kieContainer.newKieBase(kconfig);
+    }
 
-		if (file.canRead()) {
-			KieServices kieServices = KieServices.Factory.get();
-			String fullPath = file.getAbsolutePath();
+    private void writeAllRule(KieFileSystem kfs, File file) {
+        if (!file.exists() || file.isHidden()) {
+            return;
+        }
 
-			if (File.separator.equals("\\")) {
-				// For Windows Platform
-				fullPath = fullPath.replaceAll("\\\\", "/");
-			}
-			
-			kfs.write("src/main/resources/" + fullPath, kieServices.getResources().newFileSystemResource(fullPath, "UTF-8"));
+        if (file.isDirectory()) {
+            for (File subFile : file.listFiles()) {
+                writeAllRule(kfs, subFile);
+            }
+            return;
+        }
 
-		}
-	}
-	
-	public void disposeAll() {
-		logger.debug("##################### disposeAll start ");
-		
-		while(true) {
-		    KieSession session = pool.poll();
-			if(session == null) {
-				break;
-			} else {
-			    session.dispose();
-			    logger.debug("destory() Dispose RuleSession {}", session);
-			}
-		}
+        if (file.canRead()) {
+            KieServices kieServices = KieServices.Factory.get();
+            String fullPath = file.getAbsolutePath();
 
-		KieServices.Factory.get().getRepository().removeKieModule(releaseId);
-		
-		logger.info("##################### disposeAll end ");
-	}
-	
-	private void logKBase(KieBase kbase) {
-		logger.debug(" kbase = {}", kbase);
-		
-		Collection<KiePackage> packages = kbase.getKiePackages();
-		
-		for (KiePackage pkg : packages) {
-			logger.debug("  pkg = {}", pkg);
-			
-			Collection<Rule> rules = pkg.getRules();
-			for (Rule rule : rules) {
-				logger.debug("   rule = {}", rule.getName());
-			}
-		}
-	}
+            if (File.separator.equals("\\")) {
+                // For Windows Platform
+                fullPath = fullPath.replaceAll("\\\\", "/");
+            }
+
+            kfs.write("src/main/resources/" + fullPath,
+                    kieServices.getResources().newFileSystemResource(fullPath, "UTF-8"));
+
+        }
+    }
+
+    public void disposeAll() {
+        logger.debug("##################### disposeAll start ");
+
+        while (true) {
+            KieSession session = pool.poll();
+            if (session == null) {
+                break;
+            } else {
+                session.dispose();
+                logger.debug("destory() Dispose RuleSession {}", session);
+            }
+        }
+
+        KieServices.Factory.get().getRepository().removeKieModule(releaseId);
+
+        logger.info("##################### disposeAll end ");
+    }
+
+    private void logKBase(KieBase kbase) {
+        logger.debug(" kbase = {}", kbase);
+
+        Collection<KiePackage> packages = kbase.getKiePackages();
+
+        for (KiePackage pkg : packages) {
+            logger.debug("  pkg = {}", pkg);
+
+            Collection<Rule> rules = pkg.getRules();
+            for (Rule rule : rules) {
+                logger.debug("   rule = {}", rule.getName());
+            }
+        }
+    }
 
     public KieSession borrow() {
         KieSession session = pool.poll();
-        
-        if(session == null) {
-            session = kBase.newKieSession();            
+
+        if (session == null) {
+            session = kBase.newKieSession();
             logger.debug("borrow() New RuleSession {}", session);
         }
-    	return session;
+        return session;
     }
-	
+
     public void release(KieSession session) {
-    	if(session == null) {
-    		return;
-		}
-    	
-    	for(FactHandle fh : session.getFactHandles()) {
-    	    session.delete(fh);
-    	}
-    	
-    	pool.offer(session);
-	}
+        if (session == null) {
+            return;
+        }
+
+        for (FactHandle fh : session.getFactHandles()) {
+            session.delete(fh);
+        }
+
+        pool.offer(session);
+    }
 }
