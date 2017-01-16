@@ -12,8 +12,7 @@ when
     $f3 : MyFact3(id == $f2.id, value1 == $f2.value1, value2 == $f2.value2, value3 == $f2.value3, value4 == $f2.value4, value5 == $f2.value5)
     $f4 : MyFact4(id == $f3.id, value1 == $f3.value1, value2 == $f3.value2, value3 == $f3.value3, value4 == $f3.value4, value5 == $f3.value5)
     
-    $var0 : Long() from accumulate($a0 : MyFact5(id == $f4.id), count( $a0 ))
-    eval($var0 != 0)
+    $var0 : Long(this != 0) from accumulate($a0 : MyFact5(id == $f4.id), count( $a0 ))
 
 then 
     result.getRuleResult().add($f1.getValue1() + "," + $f2.getValue1());
@@ -26,8 +25,7 @@ when
     $f3 : MyFact3(id == $f2.id, value1 == $f2.value1, value2 == $f2.value2, value3 == $f2.value3, value4 == $f2.value4, value5 == $f2.value5)
     $f4 : MyFact4(id == $f3.id, value1 == $f3.value1, value2 == $f3.value2, value3 == $f3.value3, value4 == $f3.value4, value5 == $f3.value5)
 
-    $var0 : Long() from accumulate($a0 : MyFact5(value1 == $f4.value1), count( $a0 ))
-    eval($var0 != 0)
+    $var0 : Long(this != 0) from accumulate($a0 : MyFact5(value1 == $f4.value1), count( $a0 ))
 
 then 
     result.getRuleResult().add($f1.getValue1() + "," + $f2.getValue1());
@@ -40,8 +38,7 @@ when
     $f3 : MyFact3(id == $f2.id, value1 == $f2.value1, value2 == $f2.value2, value3 == $f2.value3, value4 == $f2.value4, value5 == $f2.value5)
     $f4 : MyFact4(id == $f3.id, value1 == $f3.value1, value2 == $f3.value2, value3 == $f3.value3, value4 == $f3.value4, value5 == $f3.value5)
 
-    $var0 : Long() from accumulate($a0 : MyFact5(value2 == $f4.value2), count( $a0 ))
-    eval($var0 != 0)
+    $var0 : Long(this != 0) from accumulate($a0 : MyFact5(value2 == $f4.value2), count( $a0 ))
 
 then 
     result.getRuleResult().add($f1.getValue1() + "," + $f2.getValue1());
@@ -54,8 +51,7 @@ when
     $f3 : MyFact3(id == $f2.id, value1 == $f2.value1, value2 == $f2.value2, value3 == $f2.value3, value4 == $f2.value4, value5 == $f2.value5)
     $f4 : MyFact4(id == $f3.id, value1 == $f3.value1, value2 == $f3.value2, value3 == $f3.value3, value4 == $f3.value4, value5 == $f3.value5)
 
-    $var0 : Long() from accumulate($a0 : MyFact5(value5 == $f4.value5), count( $a0 ))
-    eval($var0 != 0)
+    $var0 : Long(this != 0) from accumulate($a0 : MyFact5(value5 == $f4.value5), count( $a0 ))
 
 then 
     result.getRuleResult().add($f1.getValue1() + "," + $f2.getValue1());
@@ -68,8 +64,7 @@ when
     $f3 : MyFact3(id == $f2.id, value1 == $f2.value1, value2 == $f2.value2, value3 == $f2.value3, value4 == $f2.value4, value5 == $f2.value5)
     $f4 : MyFact4(id == $f3.id, value1 == $f3.value1, value2 == $f3.value2, value3 == $f3.value3, value4 == $f3.value4, value5 == $f3.value5)
 
-    $var0 : Long() from accumulate($a0 : MyFact5(value2 == $f4.value1), count( $a0 ))
-    eval($var0 != 0)
+    $var0 : Long(this != 0) from accumulate($a0 : MyFact5(value2 == $f4.value1), count( $a0 ))
 
 then 
     result.getRuleResult().add($f1.getValue1() + "," + $f2.getValue1());
@@ -82,8 +77,7 @@ when
     $f3 : MyFact3(id == $f2.id, value1 == $f2.value1, value2 == $f2.value2, value3 == $f2.value3, value4 == $f2.value4, value5 == $f2.value5)
     $f4 : MyFact4(id == $f3.id, value1 == $f3.value1, value2 == $f3.value2, value3 == $f3.value3, value4 == $f3.value4, value5 == $f3.value5)
 
-    $var0 : Long() from accumulate($a0 : MyFact5(value2 == $f4.value3), count( $a0 ))
-    eval($var0 != 0)
+    $var0 : Long(this != 0) from accumulate($a0 : MyFact5(value2 == $f4.value3), count( $a0 ))
 
 then 
     result.getRuleResult().add($f1.getValue1() + "," + $f2.getValue1());
@@ -96,8 +90,7 @@ when
     $f3 : MyFact3(id == $f2.id, value1 == $f2.value1, value2 == $f2.value2, value3 == $f2.value3, value4 == $f2.value4, value5 == $f2.value5)
     $f4 : MyFact4(id == $f3.id, value1 == $f3.value1, value2 == $f3.value2, value3 == $f3.value3, value4 == $f3.value4, value5 == $f3.value5)
 
-    $var0 : Long() from accumulate($a0 : MyFact5(value2 == $f4.value4), count( $a0 ))
-    eval($var0 != 0)
+    $var0 : Long(this != 0) from accumulate($a0 : MyFact5(value2 == $f4.value4), count( $a0 ))
 
 then 
     result.getRuleResult().add($f1.getValue1() + "," + $f2.getValue1());
@@ -110,8 +103,7 @@ when
     $f3 : MyFact3(id == $f2.id, value1 == $f2.value1, value2 == $f2.value2, value3 == $f2.value3, value4 == $f2.value4, value5 == $f2.value5)
     $f4 : MyFact4(id == $f3.id, value1 == $f3.value1, value2 == $f3.value2, value3 == $f3.value3, value4 == $f3.value4, value5 == $f3.value5)
 
-    $var0 : Long() from accumulate($a0 : MyFact5(value6 == $f4.value2), count( $a0 ))
-    eval($var0 != 0)
+    $var0 : Long(this != 0) from accumulate($a0 : MyFact5(value6 == $f4.value2), count( $a0 ))
 
 then 
     result.getRuleResult().add($f1.getValue1() + "," + $f2.getValue1());
@@ -124,8 +116,7 @@ when
     $f3 : MyFact3(id == $f2.id, value1 == $f2.value1, value2 == $f2.value2, value3 == $f2.value3, value4 == $f2.value4, value5 == $f2.value5)
     $f4 : MyFact4(id == $f3.id, value1 == $f3.value1, value2 == $f3.value2, value3 == $f3.value3, value4 == $f3.value4, value5 == $f3.value5)
     
-    $var0 : Long() from accumulate($a0 : MyFact5(value2 == $f4.value5), count( $a0 ))
-    eval($var0 != 0)
+    $var0 : Long(this != 0) from accumulate($a0 : MyFact5(value2 == $f4.value5), count( $a0 ))
 
 then 
     result.getRuleResult().add($f1.getValue1() + "," + $f2.getValue1());
