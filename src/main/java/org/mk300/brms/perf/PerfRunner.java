@@ -103,7 +103,8 @@ public class PerfRunner {
                     session.insert(fact4);
                     session.insert(fact5);
 
-                    session.fireAllRules();
+                    int x = session.fireAllRules();
+                    //System.out.println(x);
 
                 } finally {
                     ruleBase.release(session);
