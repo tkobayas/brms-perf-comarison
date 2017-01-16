@@ -146,9 +146,12 @@ public class RuleBase {
             return;
         }
 
-        for (FactHandle fh : session.getFactHandles()) {
-            session.delete(fh);
-        }
+//        for (FactHandle fh : session.getFactHandles()) {
+//            session.delete(fh);
+//        }
+        
+        session.dispose();
+        session = kBase.newKieSession();
 
         pool.offer(session);
     }
