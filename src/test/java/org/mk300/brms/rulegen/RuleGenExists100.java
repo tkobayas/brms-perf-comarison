@@ -29,7 +29,7 @@ public class RuleGenExists100 {
             builder.append("    $f2 : MyFact2(id == $f1.id, value1 == \"hoge1\", value2 == $f1.value2, value3 == $f1.value3, value4 == $f1.value4, value5 == $f1.value5)\n");
             builder.append("    $f3 : MyFact3(id == $f1.id, value1 == \"hoge" + suffixX + "\", value2 == $f1.value2, value3 == $f1.value3, value4 == $f1.value4, value5 == $f1.value5)\n");
             builder.append("    $f4 : MyFact4(id == $f1.id, value1 == \"hoge" + suffix1 + "\", value2 == $f1.value2, value3 == $f1.value3, value4 == $f1.value4, value5 == $f1.value5)\n");
-            builder.append("    exists MyFact5(id != null && value1 == $f4.value1)\n");
+            builder.append("    exists MyFact5(id == $f1.id && value1 == $f4.value1)\n");
             builder.append("then\n");
 //            builder.append("System.out.println(kcontext.getRule());\n");
             builder.append("    result.getRuleResult().add($f1.getValue1() + \",\" + $f2.getValue1());\n");
