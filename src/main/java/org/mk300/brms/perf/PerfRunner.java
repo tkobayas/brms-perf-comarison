@@ -1,5 +1,6 @@
 package org.mk300.brms.perf;
 
+import java.util.UUID;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -56,9 +57,11 @@ public class PerfRunner {
 
                     final MyFunction result = new MyFunction();
                     session.setGlobal("result", result);
+                    
+                    String uuid = UUID.randomUUID().toString();
 
                     MyFact1 fact1 = new MyFact1();
-                    fact1.setId("hoge");
+                    fact1.setId(uuid);
                     fact1.setValue1("hoge1");
                     fact1.setValue2("hoge2");
                     fact1.setValue3("hoge3");
@@ -66,7 +69,7 @@ public class PerfRunner {
                     fact1.setValue5("hoge5");
 
                     MyFact2 fact2 = new MyFact2();
-                    fact2.setId("hoge");
+                    fact2.setId(uuid);
                     fact2.setValue1("hoge1");
                     fact2.setValue2("hoge2");
                     fact2.setValue3("hoge3");
@@ -74,7 +77,7 @@ public class PerfRunner {
                     fact2.setValue5("hoge5");
 
                     MyFact3 fact3 = new MyFact3();
-                    fact3.setId("hoge");
+                    fact3.setId(uuid);
                     fact3.setValue1("hoge1");
                     fact3.setValue2("hoge2");
                     fact3.setValue3("hoge3");
@@ -82,7 +85,7 @@ public class PerfRunner {
                     fact3.setValue5("hoge5");
 
                     MyFact4 fact4 = new MyFact4();
-                    fact4.setId("hoge");
+                    fact4.setId(uuid);
                     fact4.setValue1("hoge1");
                     fact4.setValue2("hoge2");
                     fact4.setValue3("hoge3");
@@ -90,7 +93,7 @@ public class PerfRunner {
                     fact4.setValue5("hoge5");
 
                     MyFact5 fact5 = new MyFact5();
-                    fact5.setId("hoge");
+                    fact5.setId(uuid);
                     fact5.setValue1("hoge1");
                     fact5.setValue2("hoge2");
                     fact5.setValue3("hoge3");

@@ -146,9 +146,9 @@ public class RuleBase {
             return;
         }
 
-        for (FactHandle fh : session.getFactHandles()) {
-            session.delete(fh);
-        }
+//        for (FactHandle fh : session.getFactHandles()) {
+//            session.delete(fh);
+//        }
 
         pool.offer(session);
     }
