@@ -43,7 +43,7 @@ public class RuleGenAccumulate1000 {
 
         System.out.println(builder.toString());
         
-        PrintWriter pw = new PrintWriter(new FileWriter("tmp.txt"));
+        PrintWriter pw = new PrintWriter(new FileWriter("work/Rule2-" + RULE_NUM + ".drl"));
         pw.print(builder.toString());
         pw.close();
         

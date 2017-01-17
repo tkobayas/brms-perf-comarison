@@ -1,5 +1,8 @@
 package org.mk300.brms.rulegen;
 
+import java.io.FileWriter;
+import java.io.PrintWriter;
+
 public class RuleGenExists100 {
 
     static final int RULE_NUM = 100;
@@ -8,7 +11,7 @@ public class RuleGenExists100 {
 
         StringBuilder builder = new StringBuilder();
 
-        builder.append("package org.mk300.brms.perf.exists\n\n");
+        builder.append("package org.mk300.brms.perf.exists\n\n"); 
         builder.append("import org.mk300.brms.perf.facts.*;\n");
         builder.append("import org.mk300.brms.perf.functions.*;\n\n");
         builder.append("global MyFunction result;\n\n");
@@ -38,6 +41,10 @@ public class RuleGenExists100 {
         }
 
         System.out.println(builder.toString());
+        
+        PrintWriter pw = new PrintWriter(new FileWriter("work/Rule1-" + RULE_NUM + ".drl"));
+        pw.print(builder.toString());
+        pw.close();
     }
 
 }

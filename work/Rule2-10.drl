@@ -1,0 +1,117 @@
+package org.mk300.brms.perf.accumulate
+
+import org.mk300.brms.perf.facts.*;
+import org.mk300.brms.perf.functions.*;
+
+global MyFunction result;
+
+rule "Rule0"
+when
+    $f1 : MyFact1()
+    $f2 : MyFact2(id == $f1.id, value1 == "hoge1", value2 == $f1.value2, value3 == $f1.value3, value4 == $f1.value4, value5 == $f1.value5)
+    $f3 : MyFact3(id == $f1.id, value1 == "hoge1", value2 == $f1.value2, value3 == $f1.value3, value4 == $f1.value4, value5 == $f1.value5)
+    $f4 : MyFact4(id == $f1.id, value1 == "hoge1", value2 == $f1.value2, value3 == $f1.value3, value4 == $f1.value4, value5 == $f1.value5)
+    $var0 : Long(this != 0) from accumulate($a0 : MyFact5(value1 == "hoge1", id == $f1.id), count( $a0 ))
+then
+    result.getRuleResult().add($f1.getValue1() + "," + $f2.getValue1());
+end
+
+rule "Rule1"
+when
+    $f1 : MyFact1()
+    $f2 : MyFact2(id == $f1.id, value1 == "hoge1", value2 == $f1.value2, value3 == $f1.value3, value4 == $f1.value4, value5 == $f1.value5)
+    $f3 : MyFact3(id == $f1.id, value1 == "hoge1", value2 == $f1.value2, value3 == $f1.value3, value4 == $f1.value4, value5 == $f1.value5)
+    $f4 : MyFact4(id == $f1.id, value1 == "hoge2", value2 == $f1.value2, value3 == $f1.value3, value4 == $f1.value4, value5 == $f1.value5)
+    $var0 : Long(this != 0) from accumulate($a0 : MyFact5(value1 == "hoge1", id == $f1.id), count( $a0 ))
+then
+    result.getRuleResult().add($f1.getValue1() + "," + $f2.getValue1());
+end
+
+rule "Rule2"
+when
+    $f1 : MyFact1()
+    $f2 : MyFact2(id == $f1.id, value1 == "hoge1", value2 == $f1.value2, value3 == $f1.value3, value4 == $f1.value4, value5 == $f1.value5)
+    $f3 : MyFact3(id == $f1.id, value1 == "hoge1", value2 == $f1.value2, value3 == $f1.value3, value4 == $f1.value4, value5 == $f1.value5)
+    $f4 : MyFact4(id == $f1.id, value1 == "hoge3", value2 == $f1.value2, value3 == $f1.value3, value4 == $f1.value4, value5 == $f1.value5)
+    $var0 : Long(this != 0) from accumulate($a0 : MyFact5(value1 == "hoge1", id == $f1.id), count( $a0 ))
+then
+    result.getRuleResult().add($f1.getValue1() + "," + $f2.getValue1());
+end
+
+rule "Rule3"
+when
+    $f1 : MyFact1()
+    $f2 : MyFact2(id == $f1.id, value1 == "hoge1", value2 == $f1.value2, value3 == $f1.value3, value4 == $f1.value4, value5 == $f1.value5)
+    $f3 : MyFact3(id == $f1.id, value1 == "hoge1", value2 == $f1.value2, value3 == $f1.value3, value4 == $f1.value4, value5 == $f1.value5)
+    $f4 : MyFact4(id == $f1.id, value1 == "hoge4", value2 == $f1.value2, value3 == $f1.value3, value4 == $f1.value4, value5 == $f1.value5)
+    $var0 : Long(this != 0) from accumulate($a0 : MyFact5(value1 == "hoge1", id == $f1.id), count( $a0 ))
+then
+    result.getRuleResult().add($f1.getValue1() + "," + $f2.getValue1());
+end
+
+rule "Rule4"
+when
+    $f1 : MyFact1()
+    $f2 : MyFact2(id == $f1.id, value1 == "hoge1", value2 == $f1.value2, value3 == $f1.value3, value4 == $f1.value4, value5 == $f1.value5)
+    $f3 : MyFact3(id == $f1.id, value1 == "hoge1", value2 == $f1.value2, value3 == $f1.value3, value4 == $f1.value4, value5 == $f1.value5)
+    $f4 : MyFact4(id == $f1.id, value1 == "hoge5", value2 == $f1.value2, value3 == $f1.value3, value4 == $f1.value4, value5 == $f1.value5)
+    $var0 : Long(this != 0) from accumulate($a0 : MyFact5(value1 == "hoge1", id == $f1.id), count( $a0 ))
+then
+    result.getRuleResult().add($f1.getValue1() + "," + $f2.getValue1());
+end
+
+rule "Rule5"
+when
+    $f1 : MyFact1()
+    $f2 : MyFact2(id == $f1.id, value1 == "hoge1", value2 == $f1.value2, value3 == $f1.value3, value4 == $f1.value4, value5 == $f1.value5)
+    $f3 : MyFact3(id == $f1.id, value1 == "hoge1", value2 == $f1.value2, value3 == $f1.value3, value4 == $f1.value4, value5 == $f1.value5)
+    $f4 : MyFact4(id == $f1.id, value1 == "hoge6", value2 == $f1.value2, value3 == $f1.value3, value4 == $f1.value4, value5 == $f1.value5)
+    $var0 : Long(this != 0) from accumulate($a0 : MyFact5(value1 == "hoge1", id == $f1.id), count( $a0 ))
+then
+    result.getRuleResult().add($f1.getValue1() + "," + $f2.getValue1());
+end
+
+rule "Rule6"
+when
+    $f1 : MyFact1()
+    $f2 : MyFact2(id == $f1.id, value1 == "hoge1", value2 == $f1.value2, value3 == $f1.value3, value4 == $f1.value4, value5 == $f1.value5)
+    $f3 : MyFact3(id == $f1.id, value1 == "hoge1", value2 == $f1.value2, value3 == $f1.value3, value4 == $f1.value4, value5 == $f1.value5)
+    $f4 : MyFact4(id == $f1.id, value1 == "hoge7", value2 == $f1.value2, value3 == $f1.value3, value4 == $f1.value4, value5 == $f1.value5)
+    $var0 : Long(this != 0) from accumulate($a0 : MyFact5(value1 == "hoge1", id == $f1.id), count( $a0 ))
+then
+    result.getRuleResult().add($f1.getValue1() + "," + $f2.getValue1());
+end
+
+rule "Rule7"
+when
+    $f1 : MyFact1()
+    $f2 : MyFact2(id == $f1.id, value1 == "hoge1", value2 == $f1.value2, value3 == $f1.value3, value4 == $f1.value4, value5 == $f1.value5)
+    $f3 : MyFact3(id == $f1.id, value1 == "hoge1", value2 == $f1.value2, value3 == $f1.value3, value4 == $f1.value4, value5 == $f1.value5)
+    $f4 : MyFact4(id == $f1.id, value1 == "hoge8", value2 == $f1.value2, value3 == $f1.value3, value4 == $f1.value4, value5 == $f1.value5)
+    $var0 : Long(this != 0) from accumulate($a0 : MyFact5(value1 == "hoge1", id == $f1.id), count( $a0 ))
+then
+    result.getRuleResult().add($f1.getValue1() + "," + $f2.getValue1());
+end
+
+rule "Rule8"
+when
+    $f1 : MyFact1()
+    $f2 : MyFact2(id == $f1.id, value1 == "hoge1", value2 == $f1.value2, value3 == $f1.value3, value4 == $f1.value4, value5 == $f1.value5)
+    $f3 : MyFact3(id == $f1.id, value1 == "hoge1", value2 == $f1.value2, value3 == $f1.value3, value4 == $f1.value4, value5 == $f1.value5)
+    $f4 : MyFact4(id == $f1.id, value1 == "hoge9", value2 == $f1.value2, value3 == $f1.value3, value4 == $f1.value4, value5 == $f1.value5)
+    $var0 : Long(this != 0) from accumulate($a0 : MyFact5(value1 == "hoge1", id == $f1.id), count( $a0 ))
+then
+    result.getRuleResult().add($f1.getValue1() + "," + $f2.getValue1());
+end
+
+rule "Rule9"
+when
+    $f1 : MyFact1()
+    $f2 : MyFact2(id == $f1.id, value1 == "hoge1", value2 == $f1.value2, value3 == $f1.value3, value4 == $f1.value4, value5 == $f1.value5)
+    $f3 : MyFact3(id == $f1.id, value1 == "hoge1", value2 == $f1.value2, value3 == $f1.value3, value4 == $f1.value4, value5 == $f1.value5)
+    $f4 : MyFact4(id == $f1.id, value1 == "hoge10", value2 == $f1.value2, value3 == $f1.value3, value4 == $f1.value4, value5 == $f1.value5)
+    $var0 : Long(this != 0) from accumulate($a0 : MyFact5(value1 == "hoge1", id == $f1.id), count( $a0 ))
+then
+    result.getRuleResult().add($f1.getValue1() + "," + $f2.getValue1());
+end
+

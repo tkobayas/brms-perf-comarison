@@ -3,9 +3,9 @@ package org.mk300.brms.rulegen;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 
-public class RuleGenExists1000 {
+public class RuleGenExists10 {
 
-    static final int RULE_NUM = 1000;
+    static final int RULE_NUM = 10;
 
     public static void main(String[] args) throws Exception {
 

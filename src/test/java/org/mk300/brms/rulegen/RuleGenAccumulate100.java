@@ -1,5 +1,8 @@
 package org.mk300.brms.rulegen;
 
+import java.io.FileWriter;
+import java.io.PrintWriter;
+
 public class RuleGenAccumulate100 {
 
     static final int RULE_NUM = 100;
@@ -38,6 +41,10 @@ public class RuleGenAccumulate100 {
         }
 
         System.out.println(builder.toString());
+        
+        PrintWriter pw = new PrintWriter(new FileWriter("work/Rule2-" + RULE_NUM + ".drl"));
+        pw.print(builder.toString());
+        pw.close();
     }
 
 }
